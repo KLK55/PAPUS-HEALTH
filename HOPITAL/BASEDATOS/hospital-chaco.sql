@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-09-2023 a las 21:00:45
+-- Tiempo de generación: 19-09-2023 a las 19:03:10
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -28,26 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `Id_Admin` int(11) NOT NULL,
-  `Nombre` text NOT NULL,
-  `Apellido` text NOT NULL,
-  `N_Usuario` text NOT NULL,
-  `Contrasena` text NOT NULL,
-  `Id_Medico` int(11) NOT NULL,
-  `Id_Paciente` int(11) NOT NULL,
-  `Id_Area_Zona` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `area-zona`
---
-
-CREATE TABLE `area-zona` (
-  `Id_Area-Zona` int(11) NOT NULL,
-  `Piso` decimal(10,0) NOT NULL,
-  `Id_doctores` int(11) NOT NULL
+  `id_admin` int(11) NOT NULL,
+  `nombre` text NOT NULL,
+  `apellido` text NOT NULL,
+  `N_usuario` text NOT NULL,
+  `contrasena` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -57,13 +42,26 @@ CREATE TABLE `area-zona` (
 --
 
 CREATE TABLE `doctores` (
-  `Id_Doctores` int(11) NOT NULL,
-  `Nombre` text NOT NULL,
-  `Apellido` text NOT NULL,
-  `Numero_asignado` varchar(11) NOT NULL,
-  `Pacientes_Asig` text NOT NULL,
-  `Area_Asig` int(11) NOT NULL,
-  `Id_Admin` int(11) NOT NULL
+  `id_doctor` int(11) NOT NULL,
+  `nombre` text NOT NULL,
+  `apellido` text NOT NULL,
+  `cargo` text NOT NULL,
+  `id_zona` int(11) NOT NULL,
+  `id_paciente` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `llamadas`
+--
+
+CREATE TABLE `llamadas` (
+  `id_llamadas` int(11) NOT NULL,
+  `nombre` text NOT NULL,
+  `motivo` text NOT NULL,
+  `urgencia` text NOT NULL,
+  `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -73,14 +71,28 @@ CREATE TABLE `doctores` (
 --
 
 CREATE TABLE `pacientes` (
-  `Id_Pacientes` int(11) NOT NULL,
-  `Nombre` text NOT NULL,
-  `Apellido` text NOT NULL,
-  `DNI` varchar(20) NOT NULL,
-  `Estado` text NOT NULL,
-  `Medico_Asig` text NOT NULL,
-  `Id_Administracion` int(11) NOT NULL,
-  `Zona` text NOT NULL
+  `id_paciente` int(11) NOT NULL,
+  `nombre` text NOT NULL,
+  `apellido` text NOT NULL,
+  `DNI` varchar(8) NOT NULL,
+  `estado` text NOT NULL,
+  `descripcion` text NOT NULL,
+  `id_doctor` int(11) NOT NULL,
+  `id_zona` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `zonas`
+--
+
+CREATE TABLE `zonas` (
+  `id_zona` int(11) NOT NULL,
+  `piso` decimal(10,0) NOT NULL,
+  `quirofano` varchar(2) NOT NULL,
+  `id_doctor` int(11) NOT NULL,
+  `id_paciente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -91,51 +103,90 @@ CREATE TABLE `pacientes` (
 -- Indices de la tabla `admin`
 --
 ALTER TABLE `admin`
-  ADD PRIMARY KEY (`Id_Admin`),
-  ADD UNIQUE KEY `Id_Medico` (`Id_Medico`,`Id_Paciente`,`Id_Area_Zona`);
-
---
--- Indices de la tabla `area-zona`
---
-ALTER TABLE `area-zona`
-  ADD PRIMARY KEY (`Id_Area-Zona`),
-  ADD UNIQUE KEY `Id_doctores` (`Id_doctores`);
+  ADD PRIMARY KEY (`id_admin`);
 
 --
 -- Indices de la tabla `doctores`
 --
 ALTER TABLE `doctores`
-  ADD PRIMARY KEY (`Id_Doctores`),
-  ADD UNIQUE KEY `Id_Admin` (`Id_Admin`);
+  ADD PRIMARY KEY (`id_doctor`),
+  ADD UNIQUE KEY `id_zona` (`id_zona`,`id_paciente`),
+  ADD KEY `id_paciente` (`id_paciente`);
+
+--
+-- Indices de la tabla `llamadas`
+--
+ALTER TABLE `llamadas`
+  ADD PRIMARY KEY (`id_llamadas`);
 
 --
 -- Indices de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  ADD PRIMARY KEY (`Id_Pacientes`),
-  ADD UNIQUE KEY `Id_Administracion` (`Id_Administracion`);
+  ADD PRIMARY KEY (`id_paciente`),
+  ADD UNIQUE KEY `id_medico` (`id_doctor`,`id_zona`),
+  ADD KEY `id_zona` (`id_zona`);
+
+--
+-- Indices de la tabla `zonas`
+--
+ALTER TABLE `zonas`
+  ADD PRIMARY KEY (`id_zona`),
+  ADD UNIQUE KEY `id_doctores` (`id_doctor`,`id_paciente`),
+  ADD UNIQUE KEY `id_paciente` (`id_paciente`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `area-zona`
+-- AUTO_INCREMENT de la tabla `admin`
 --
-ALTER TABLE `area-zona`
-  MODIFY `Id_Area-Zona` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `admin`
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `doctores`
 --
 ALTER TABLE `doctores`
-  MODIFY `Id_Doctores` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_doctor` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `pacientes`
+-- AUTO_INCREMENT de la tabla `llamadas`
+--
+ALTER TABLE `llamadas`
+  MODIFY `id_llamadas` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `zonas`
+--
+ALTER TABLE `zonas`
+  MODIFY `id_zona` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `doctores`
+--
+ALTER TABLE `doctores`
+  ADD CONSTRAINT `doctores_ibfk_1` FOREIGN KEY (`id_zona`) REFERENCES `zonas` (`id_zona`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `doctores_ibfk_2` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  MODIFY `Id_Pacientes` int(11) NOT NULL AUTO_INCREMENT;
+  ADD CONSTRAINT `pacientes_ibfk_1` FOREIGN KEY (`id_zona`) REFERENCES `zonas` (`id_zona`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pacientes_ibfk_2` FOREIGN KEY (`id_doctor`) REFERENCES `doctores` (`id_doctor`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `zonas`
+--
+ALTER TABLE `zonas`
+  ADD CONSTRAINT `zonas_ibfk_1` FOREIGN KEY (`id_doctor`) REFERENCES `doctores` (`id_doctor`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `zonas_ibfk_2` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
