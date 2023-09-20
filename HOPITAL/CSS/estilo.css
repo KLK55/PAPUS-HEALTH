@@ -1,12 +1,22 @@
-*{
+﻿*{
     margin: 0;
     padding: 0;
 
 }
 
-
+.logo {
+    max-width: 150px;
+    margin-right: 150px;
+    border-radius: 8px;
+    text-align:center
+}
+.logo h1 {
+    text-align: center;
+    text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+    font-size: 80px;
+}
 /*
-    ROLFI PARTE
+    ROLFI PARTE ↑
 */
 .video {
     position: absolute;

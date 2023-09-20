@@ -27,7 +27,7 @@
                   <button class="btn btn-info">Historial Medico </button>
                 </div>
                 <div class="col col-lg-2 medio">
-                <form style="border-radius=8px" action="./PHP/estado.php" method="POST">
+                <form style="border-radius=8px" action="./PHP/estado.php" method="POST" name="estado">
                 <select class="form-select medio" aria-label="Default select example">
                   <option selected>Seleciona el estado del Paciente</option>
                   <option value="skull">ESQUELETO</option>
