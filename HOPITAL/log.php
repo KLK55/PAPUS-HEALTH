@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+<?php
+session_start();
+?>
+=======
+>>>>>>> 9b06a16ec8d161032977098cedb6ec226cbf98e6
 <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -25,8 +31,8 @@
                 <input type="text" class="form-control" id="nombre" placeholder="Ingresa Nombre de Usuario" name="usuario">
             </div>
             <div class="mb-3">
-                <label class="lavel" for="pwd">Contraseña:</label>
-                <input type="password" class="form-control" id="pwd" placeholder="Ingresa Contraseña" name="contrasena">
+                <label class="lavel" for="pwd">Contrasena:</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Ingresa Contraseï¿½a" name="contrasena">
             </div>
             <div class="form-check mb-3">
                 <label class="lavel" class="form-check-label">

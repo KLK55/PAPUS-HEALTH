@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
     transition: background-color 0.5s;
     margin: 0;
@@ -50,4 +51,58 @@ body {
 #h2{
     color: wheat;
     text-align: center;
+=======
+body {
+    transition: background-color 0.5s;
+    margin: 0;
+    overflow: hidden;
+}
+
+.boton-1 {
+    text-align: left;
+    float: left;
+}
+
+.boton-2 {
+    text-align: right;
+    float: right;
+}
+
+.b1 {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #57f287;
+    color: black;
+}
+.b2 {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #6571f3;
+    color: wheat;
+}
+
+#content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#content {
+    display: none;
+}
+
+#h1{
+    color: wheat;
+    text-align: center;
+}
+
+#h2{
+    color: wheat;
+    text-align: center;
+>>>>>>> 9b06a16ec8d161032977098cedb6ec226cbf98e6
 }

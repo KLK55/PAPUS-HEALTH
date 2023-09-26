@@ -12,10 +12,18 @@ if ($result > 0){
     if ($contra == $hapen['DNI']) {
 	$_SESSION['nombre'] = $hapen['nombre'];
     
+<<<<<<< HEAD
+    header("Location: ../index.php?lol#medicos");
+=======
     header("Location: ../index.php");
+>>>>>>> 9b06a16ec8d161032977098cedb6ec226cbf98e6
     exit();
 }
 else{
     echo "NO ESTAS";
+<<<<<<< HEAD
+}}
+=======
 }
+>>>>>>> 9b06a16ec8d161032977098cedb6ec226cbf98e6
 ?>
