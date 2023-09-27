@@ -17,15 +17,15 @@
 <div class="todo">
 <?php
 if (isset($_GET['lol'])) {
-	echo "<h1>FAROS</h1>";
-} ?>
+	echo "<h1>FAROS</h1>";}
+ ?>
     <?php include("./PHP/conexion.php");
 
     $kk = mysqli_query($conexion,"SELECT * FROM `docpaczon` T, `doctores` D, `pacientes` P, `zonas` Z
     WHERE Z.id_zona = T.id_zona
     AND P.id_pacientes = T.id_paciente
     AND D.id_doctor = T.id_doctor ");
-    while($pacientes_caja = mysqli_fetch_row($kk)) {
+    while($pacientes_caja = mysqli_fetch_row($kk))
     ?>
         <div class="container p-5 my-5 bg-dark text-white koko">            
             <div class="input-group mb-3">
@@ -59,7 +59,6 @@ if (isset($_GET['lol'])) {
             <div class="row"><button type="submit" class="btn btn-primary espaciado">CODIGO AZUL</button><div>
         <div>
         </br>
-        <?php } ?>
 <div>
 
 </body>

@@ -1,5 +1,13 @@
 <?php
+include("./php/conexion.php");
 session_start();
+$medicox = $_SESSION['N_usuario'];
+$idUsuario = $_SESSION['id_admin'];
+
+if () {
+	
+}
+
 ?>
 <!DOCTYPE html>
 
@@ -14,7 +22,7 @@ session_start();
 </head>
 <body>
 <div class="todo">    
-    <?php include("./php/conexion.php"); ?>
+    
     <div class="logo">
         <h1> HOSPITAL "EL CHACO"</h1>
     </div>
@@ -28,8 +36,8 @@ session_start();
                 <input type="text" class="form-control" id="nombre" placeholder="Ingresa Nombre de Usuario" name="usuario">
             </div>
             <div class="mb-3">
-                <label class="lavel" for="pwd">Contrasena:</label>
-                <input type="password" class="form-control" id="pwd" placeholder="Ingresa Contraseï¿½a" name="contrasena">
+                <label class="lavel" for="pwd">Contraseña:</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Ingresa Contraseña" name="contrasena">
             </div>
             <div class="form-check mb-3">
                 <label class="lavel" class="form-check-label">

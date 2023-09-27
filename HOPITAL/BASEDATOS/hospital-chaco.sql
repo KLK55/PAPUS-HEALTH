@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-09-2023 a las 19:03:10
+-- Tiempo de generación: 27-09-2023 a las 19:11:29
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -38,6 +38,29 @@ CREATE TABLE `admin` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `docpaczon`
+--
+
+CREATE TABLE `docpaczon` (
+  `id_docpaczon` int(11) NOT NULL,
+  `id_zona` int(11) NOT NULL,
+  `id_paciente` int(11) NOT NULL,
+  `id_doctor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `docpaczon`
+--
+
+INSERT INTO `docpaczon` (`id_docpaczon`, `id_zona`, `id_paciente`, `id_doctor`) VALUES
+(1, 1, 1, 3),
+(2, 2, 2, 1),
+(3, 3, 4, 2),
+(4, 4, 3, 4);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `doctores`
 --
 
@@ -45,10 +68,18 @@ CREATE TABLE `doctores` (
   `id_doctor` int(11) NOT NULL,
   `nombre` text NOT NULL,
   `apellido` text NOT NULL,
-  `cargo` text NOT NULL,
-  `id_zona` int(11) NOT NULL,
-  `id_paciente` int(11) NOT NULL
+  `cargo` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `doctores`
+--
+
+INSERT INTO `doctores` (`id_doctor`, `nombre`, `apellido`, `cargo`) VALUES
+(1, 'franco', 'salvatierra', 'cabecera'),
+(2, 'genaro', 'iannelo', 'neurólogo'),
+(3, 'stefano', 'peralta', 'pediatra'),
+(4, 'santiago', 'miras', 'oftalmólogo');
 
 -- --------------------------------------------------------
 
@@ -71,15 +102,23 @@ CREATE TABLE `llamadas` (
 --
 
 CREATE TABLE `pacientes` (
-  `id_paciente` int(11) NOT NULL,
+  `id_pacientes` int(11) NOT NULL,
   `nombre` text NOT NULL,
   `apellido` text NOT NULL,
   `DNI` varchar(8) NOT NULL,
   `estado` text NOT NULL,
-  `descripcion` text NOT NULL,
-  `id_doctor` int(11) NOT NULL,
-  `id_zona` int(11) NOT NULL
+  `descripcion` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pacientes`
+--
+
+INSERT INTO `pacientes` (`id_pacientes`, `nombre`, `apellido`, `DNI`, `estado`, `descripcion`) VALUES
+(1, 'mateo', 'francisco', '45932512', 'esqueleto', 'casi muelto'),
+(2, 'gabriel', 'rolfi', '4235698', 'casi vivo', 'esta joya'),
+(3, 'gaston', 'falcon', '46235658', 'bien', 'ya casi esta saludable'),
+(4, 'inca', 'rreable', '45512932', 'de alta', 'esta joya, que vaya a su casa');
 
 -- --------------------------------------------------------
 
@@ -89,11 +128,20 @@ CREATE TABLE `pacientes` (
 
 CREATE TABLE `zonas` (
   `id_zona` int(11) NOT NULL,
-  `piso` decimal(10,0) NOT NULL,
-  `quirofano` varchar(2) NOT NULL,
-  `id_doctor` int(11) NOT NULL,
-  `id_paciente` int(11) NOT NULL
+  `piso` text NOT NULL,
+  `quirofano` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `zonas`
+--
+
+INSERT INTO `zonas` (`id_zona`, `piso`, `quirofano`) VALUES
+(1, 'primero', '1'),
+(2, 'Primero', '2'),
+(3, 'Primero', '3'),
+(4, 'Primero', '4'),
+(5, 'segundo', '1');
 
 --
 -- Índices para tablas volcadas
@@ -106,12 +154,19 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
+-- Indices de la tabla `docpaczon`
+--
+ALTER TABLE `docpaczon`
+  ADD PRIMARY KEY (`id_docpaczon`),
+  ADD UNIQUE KEY `id_zona` (`id_zona`,`id_paciente`,`id_doctor`),
+  ADD KEY `id_doctor` (`id_doctor`),
+  ADD KEY `id_paciente` (`id_paciente`);
+
+--
 -- Indices de la tabla `doctores`
 --
 ALTER TABLE `doctores`
-  ADD PRIMARY KEY (`id_doctor`),
-  ADD UNIQUE KEY `id_zona` (`id_zona`,`id_paciente`),
-  ADD KEY `id_paciente` (`id_paciente`);
+  ADD PRIMARY KEY (`id_doctor`);
 
 --
 -- Indices de la tabla `llamadas`
@@ -123,17 +178,13 @@ ALTER TABLE `llamadas`
 -- Indices de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  ADD PRIMARY KEY (`id_paciente`),
-  ADD UNIQUE KEY `id_medico` (`id_doctor`,`id_zona`),
-  ADD KEY `id_zona` (`id_zona`);
+  ADD PRIMARY KEY (`id_pacientes`);
 
 --
 -- Indices de la tabla `zonas`
 --
 ALTER TABLE `zonas`
-  ADD PRIMARY KEY (`id_zona`),
-  ADD UNIQUE KEY `id_doctores` (`id_doctor`,`id_paciente`),
-  ADD UNIQUE KEY `id_paciente` (`id_paciente`);
+  ADD PRIMARY KEY (`id_zona`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -146,10 +197,16 @@ ALTER TABLE `admin`
   MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `docpaczon`
+--
+ALTER TABLE `docpaczon`
+  MODIFY `id_docpaczon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `doctores`
 --
 ALTER TABLE `doctores`
-  MODIFY `id_doctor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_doctor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `llamadas`
@@ -158,35 +215,28 @@ ALTER TABLE `llamadas`
   MODIFY `id_llamadas` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `pacientes`
+--
+ALTER TABLE `pacientes`
+  MODIFY `id_pacientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `zonas`
 --
 ALTER TABLE `zonas`
-  MODIFY `id_zona` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_zona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `doctores`
+-- Filtros para la tabla `docpaczon`
 --
-ALTER TABLE `doctores`
-  ADD CONSTRAINT `doctores_ibfk_1` FOREIGN KEY (`id_zona`) REFERENCES `zonas` (`id_zona`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `doctores_ibfk_2` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `pacientes`
---
-ALTER TABLE `pacientes`
-  ADD CONSTRAINT `pacientes_ibfk_1` FOREIGN KEY (`id_zona`) REFERENCES `zonas` (`id_zona`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pacientes_ibfk_2` FOREIGN KEY (`id_doctor`) REFERENCES `doctores` (`id_doctor`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `zonas`
---
-ALTER TABLE `zonas`
-  ADD CONSTRAINT `zonas_ibfk_1` FOREIGN KEY (`id_doctor`) REFERENCES `doctores` (`id_doctor`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `zonas_ibfk_2` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `docpaczon`
+  ADD CONSTRAINT `docpaczon_ibfk_1` FOREIGN KEY (`id_doctor`) REFERENCES `doctores` (`id_doctor`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `docpaczon_ibfk_2` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id_pacientes`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `docpaczon_ibfk_3` FOREIGN KEY (`id_zona`) REFERENCES `zonas` (`id_zona`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
