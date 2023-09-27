@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -15,27 +18,15 @@
 </video>
 
 <div class="todo">
-<?php
-if (isset($_GET['lol'])) {
-	echo "<h1>FAROS</h1>";}
- ?>
-    <?php include("./PHP/conexion.php");
-
-    $kk = mysqli_query($conexion,"SELECT * FROM `docpaczon` T, `doctores` D, `pacientes` P, `zonas` Z
-    WHERE Z.id_zona = T.id_zona
-    AND P.id_pacientes = T.id_paciente
-    AND D.id_doctor = T.id_doctor ");
-    while($pacientes_caja = mysqli_fetch_row($kk))
-    ?>
-        <div class="container p-5 my-5 bg-dark text-white koko">            
+	<div class="container p-5 my-5 bg-dark text-white koko">            
             <div class="input-group mb-3">
              <div class="container">
               <div class="row">
                 <div class="col">
-                  <h2>Piso: <?php echo $pacientes_caja['piso'] ?>, Sala: <?php echo $pacientes_caja['quirofano'] ?></h2>
+                  <h2>Piso: <?php echo $datapac['piso'] ?>, Sala: <?php echo $datapac['quirofano'] ?></h2>
                 </div>
                 <div class="col">
-                  <h2>Nombre de Paciente:<?php echo $pacientes_caja['nombres'] ?></h2>
+                  <h2>Nombre de Paciente:<?php echo $datapac['nombre'] ?></h2>
                 </div>
                 <div class="col-md-6 offset-md-3 row form" >
                   <button class="btn btn-info">Historial Medico </button>
@@ -56,10 +47,14 @@ if (isset($_GET['lol'])) {
               </div>
             </div> 
             </div>
-            <div class="row"><button type="submit" class="btn btn-primary espaciado">CODIGO AZUL</button><div>
-        <div>
+            <div class="row"><button  id="showAlertBtn" type="submit" class="btn btn-primary espaciado">CODIGO AZUL</button><div>
+            <div id="customAlert" class="custom-alert">
+            <div class="alert-content">
+                <button class="download-btn">Descargar</button>
+            </div>
+       
+</div>
         </br>
 <div>
-
 </body>
 </html>

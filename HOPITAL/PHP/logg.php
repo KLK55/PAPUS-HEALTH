@@ -15,15 +15,11 @@ if ($result > 0){
 
     header("Location: ../index.php?lol#medicos");
 
-    header("Location: ../index.php");
-
     exit();
+}
 }
 else{
     echo "NO ESTAS";
-
-}}
-
 }
 
 ?>

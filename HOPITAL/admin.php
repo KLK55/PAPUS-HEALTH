@@ -1,13 +1,5 @@
 <?php
-include("./php/conexion.php");
 session_start();
-$medicox = $_SESSION['N_usuario'];
-$idUsuario = $_SESSION['id_admin'];
-
-if () {
-	
-}
-
 ?>
 <!DOCTYPE html>
 
@@ -21,16 +13,13 @@ if () {
 
 </head>
 <body>
+<?php include("./php/conexion.php"); ?>
 <div class="todo">    
-    
     <div class="logo">
         <h1> HOSPITAL "EL CHACO"</h1>
     </div>
     <div class="container mt-3">
-        <div class="login">
-        <h2>Logiarse o <a href="./index.php">INVITADO</a></h2>
-        </div>
-        <form action="./php/logg.php">
+        <form  action="./php/adminlogg (2).php" >
             <div class="mb-3 mt-3">
                 <label class="lavel" for="nom">Nombre de Usuario:</label>
                 <input type="text" class="form-control" id="nombre" placeholder="Ingresa Nombre de Usuario" name="usuario">
