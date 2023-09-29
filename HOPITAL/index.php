@@ -1,6 +1,3 @@
-<?php 
-session_start();
-?>
 <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -23,16 +20,16 @@ session_start();
              <div class="container">
               <div class="row">
                 <div class="col">
-                  <h2>Piso: <?php echo $datapac['piso'] ?>, Sala: <?php echo $datapac['quirofano'] ?></h2>
+                  <h2>Piso: <?php echo . $PISO .  ?>, Sala: <?php echo . $QIR . ?></h2>
                 </div>
                 <div class="col">
-                  <h2>Nombre de Paciente:<?php echo $datapac['nombre'] ?></h2>
+                  <h2>Nombre de Paciente:<?php echo . $NOM . ?></h2>
                 </div>
                 <div class="col-md-6 offset-md-3 row form" >
                   <button class="btn btn-info">Historial Medico </button>
                 </div>
                 <div class="col col-lg-2 medio">
-                <form style="border-radius=8px" action="./PHP/estado.php" method="POST" name="estado">
+               <!-- <form style="border-radius=8px" action="./PHP/estado.php" method="POST" name="estado">
                 <select class="form-select medio" aria-label="Default select example">
                   <option selected>Seleciona el estado del Paciente</option>
                   <option value="skull">ESQUELETO</option>
@@ -41,20 +38,20 @@ session_start();
                   <option value="alta">DAR EL ALTA</option>
                 </select> 
                 <button type="submit" class="btn btn-danger">Ingresar</button>
-                </form>
+                </form>-->
                 </div>
         
               </div>
             </div> 
             </div>
-            <div class="row"><button  id="showAlertBtn" type="submit" class="btn btn-primary espaciado">CODIGO AZUL</button><div>
+            <div class="row"><button  id="showAlertBtn" type="submit" class="btn btn-primary espaciado">CODIGO AZUL</button></div>
             <div id="customAlert" class="custom-alert">
             <div class="alert-content">
                 <button class="download-btn">Descargar</button>
             </div>
-       
+        </div>       
 </div>
         </br>
-<div>
+</div>
 </body>
 </html>

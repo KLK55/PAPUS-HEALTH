@@ -13,7 +13,7 @@ if ($result > 0){
 	$_SESSION['nombre'] = $hapen['nombre'];
     
 
-    header("Location: ../index.php?lol#medicos");
+    header("Location: ../index.php");
 
     exit();
 }

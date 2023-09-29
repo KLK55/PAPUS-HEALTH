@@ -4,7 +4,7 @@ $doctor = $_GET["id_doctor"];
 $tas = $_REQUEST["estado"];   
 
 $conexion = mysqli_connect("localhost","root","","hospital-chaco") or exit ("no se puede conectar.....");
-$busca = "SELECT Count(*) FROM `pacientes` WHERE id_doctor = '$doctor' and estado ='$tas' ";
+$busca = "SELECT Count(*) FROM pacientes WHERE id_doctor = '$doctor' and estado ='$tas' ";
 $result = mysqli_query($conexion,$busca);
 
 if ($result > 0){
