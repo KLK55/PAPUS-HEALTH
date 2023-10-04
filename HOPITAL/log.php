@@ -20,16 +20,16 @@ session_start();
     </div>
     <div class="container mt-3">
         <div class="login">
-        <h2>Logiarse o <a href="./index.php">INVITADO</a></h2>
+        <h2>Ingrese paciente :) o <a href="./indec.php">medico</a></h2>
         </div>
         <form action="./php/logg.php">
             <div class="mb-3 mt-3">
-                <label class="lavel" for="nom">Nombre de Usuario:</label>
-                <input type="text" class="form-control" id="nombre" placeholder="Ingresa Nombre de Usuario" name="usuario">
+                <label class="lavel" for="nom">Nombre de Paciente:</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Ingresa Nombre" name="usuario">
             </div>
             <div class="mb-3">
-                <label class="lavel" for="pwd">Contrasena:</label>
-                <input type="password" class="form-control" id="pwd" placeholder="Ingresa Contrase�a" name="contrasena">
+                <label class="lavel" for="pwd">DNI:</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Ingresa tu DNI" name="contrasena">
             </div>
             <div class="form-check mb-3">
                 <label class="lavel" class="form-check-label">

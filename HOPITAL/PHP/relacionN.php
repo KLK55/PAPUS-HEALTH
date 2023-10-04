@@ -1,6 +1,6 @@
 <?php
 $PISO = $_GET["piso"];
-$QIR = $_GET["quirofano"]
+$QIR = $_GET["quirofano"];
 $NOM = $_GET["nombre"];
 
 $conexion = mysqli_connect("localhost","root","","hospital-chaco") or exit ("no se puede conectar.....");
@@ -14,4 +14,9 @@ $busca = "SELECT Z.piso, Z.quirofano, P.nombre
             AND   z.quirofano = '$NOM'";
 
 $result = mysqli_query($conexion,$busca);
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 ?>
